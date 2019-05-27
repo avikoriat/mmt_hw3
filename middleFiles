@@ -1,0 +1,8 @@
+#!/bin/bash
+#parameters list:
+# 1. directory path
+# 2. startFrom 
+# 3. endAt
+cd $1
+find $(pwd) | sort | head -n -$3 | tail -n +$(($2+2))
+	

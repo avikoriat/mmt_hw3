@@ -25,12 +25,30 @@ typedef struct _partition_node {
 }partNode, *ppartNode;
 
 ///////////////////// internal static functions //////////////////////
+/*************************************************************************
+Function name	: CreatePartNode
+Description     : creates the Node of the square partition and returns a pointer
+		to it
+Paramerters     :x_left, x_right, y_left, y_right boundaries of the
+		 partition to initialize the node
+Return value	: ppartNode - a pointer to the node
+************************************************************************/
 static ppartNode CreatePartNode(BOUNDARY x_left,
 	BOUNDARY x_right,
 	BOUNDARY y_bot,
 	BOUNDARY y_top,
 	int key);
-
+	
+/*************************************************************************
+Function name	: getNewSquareBoudaries
+Description     : updates the values of the boundaries according to the 
+		boundaries of the current node pointed by pNode and the 
+		coordinates x y
+Paramerters     :x_left, x_right, y_left, y_right boundaries to be updated,
+		coordinates of the new partition
+		a pointer to the node of the current partition
+Return value	: none
+************************************************************************/
 static void getNewSquareBoudaries(BOUNDARY* x_left,
 	BOUNDARY* x_right,
 	BOUNDARY* y_bot,
@@ -39,15 +57,46 @@ static void getNewSquareBoudaries(BOUNDARY* x_left,
 	COORDINATE y,
 	ppartNode pNode);
 
+/*************************************************************************
+Function name	: IsContained
+Description     : checks if the coordinates x and y are contained inside 
+		the boundaries of the node pointed by pNode
+Paramerters     :pNode- the partition node to check
+		x, y - the coordinates to check
+Return value	: Bool true if contained else false
+************************************************************************/
 static Bool IsContained(ppartNode pNode,
 	COORDINATE x,
 	COORDINATE y);
 
+/*************************************************************************
+Function name	: RecurRefineCell
+Description     : helper to Refine cell - recursively searches the correct 
+		node to insert the new partition node under
+Paramerters     :x, y coordinates of the new partition
+		curNode - the current node to search
+Return value	: none
+************************************************************************/
 static void RecurRefineCell(COORDINATE x, COORDINATE y, ppartNode curNode);
+
+/*************************************************************************
+Function name	: PartitionAddNode
+Description     : adds under the current partition the new partition for
+		x,y 
+Paramerters     :pparentNode - a pointer to the current partition node
+		x,y coordinates of the partition.
+Return value	: none
+************************************************************************/
 static void PartitionAddNode(COORDINATE x,
 	COORDINATE y,
 	ppartNode pparentNode);
 
+/*************************************************************************
+Function name	: DelChildArr
+Description     : deletes the array that the function TreeGetChildren allocates
+Paramerters     :ChildpArr - a pointer to the array
+Return value	: none
+************************************************************************/
 static void DelChildArr(ppartNode* ChildpArr);
 //////////////////////////////////////////////////////////////////////
 
